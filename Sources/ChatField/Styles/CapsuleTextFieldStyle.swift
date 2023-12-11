@@ -9,6 +9,8 @@ import SwiftUI
 
 /// A text field style with a capsule-shaped border.
 public struct CapsuleChatFieldStyle: TextFieldStyle {
+    public init() {}
+    
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .padding(.vertical, 6)
