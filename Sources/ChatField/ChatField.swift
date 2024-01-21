@@ -10,10 +10,10 @@ import SwiftUIIntrospect
 
 /// A SwiftUI view that provides a multiline, editable chat interface.
 ///
-/// ``ChatField`` enhances standard input capabilities with multiline chat support and adapts to specific platform requirements.
+/// ``ChatField`` extends standard text input capabilities by offering multiline text support and is optimized for different platforms .
 public struct ChatField<Footer: View>: View {
     private var titleKey: LocalizedStringKey
-    @Binding private var text: String
+    @Binding private var message: String
     
     private var action: () -> Void
     private var footer: () -> Footer
@@ -21,18 +21,18 @@ public struct ChatField<Footer: View>: View {
     /// Initializes a ``ChatField`` with specified parameters.
     ///
     /// - Parameters:
-    ///   - titleKey: A `LocalizedStringKey` for the localized title of the chat field, describing its purpose.
-    ///   - text: A binding to the text value to be displayed and edited.
-    ///   - action: A closure executed when the user submits the text.
-    ///   - footer: A closure returning the content for the footer below the chat field.
+    ///   - titleKey: A `LocalizedStringKey` representing the localized title of the chat field, indicating its functional purpose.
+    ///   - message: A `Binding` to a `String` value representing the editable text in the chat field.
+    ///   - action: A closure that is executed when the user submits the message.
+    ///   - footer: A closure returning a `View` that represents the footer content below the chat field.
     public init(
         _ titleKey: LocalizedStringKey,
-        text: Binding<String>,
+        message: Binding<String>,
         action: @escaping () -> Void,
         footer: @escaping () -> Footer
     ) {
         self.titleKey = titleKey
-        self._text = text
+        self._message = message
         self.action = action
         self.footer = footer
     }
@@ -40,11 +40,11 @@ public struct ChatField<Footer: View>: View {
     public var body: some View {
         VStack(spacing: 8) {
             #if os(iOS)
-            TextField(titleKey, text: $text, axis: .vertical)
+            TextField(titleKey, text: $message, axis: .vertical)
                 .lineLimit(5)
                 .onSubmit { action() }
             #elseif os(macOS)
-            TextField(titleKey, text: $text, axis: .vertical)
+            TextField(titleKey, text: $message, axis: .vertical)
                 .introspect(.textField(axis: .vertical), on: .macOS(.v14)) { textField in
                     textField.lineBreakMode = .byWordWrapping
                 }
@@ -64,7 +64,7 @@ public struct ChatField<Footer: View>: View {
     #if os(macOS)
     private func macOS_action() {
         if NSApp.currentEvent?.modifierFlags.contains(.shift) == true {
-            text.appendNewLine()
+            message.appendNewLine()
         } else {
             action()
         }
@@ -74,7 +74,7 @@ public struct ChatField<Footer: View>: View {
 
 #Preview {
     VStack {
-        ChatField("Message", text: .constant("")) {
+        ChatField("Message", message: .constant("")) {
             
         } footer: {
             Text("Lorem ipsum dolor sit amet.")

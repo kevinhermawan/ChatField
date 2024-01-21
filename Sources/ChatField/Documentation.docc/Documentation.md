@@ -17,10 +17,10 @@ On macOS, ``ChatField`` is designed to enhance user interaction by allowing the 
 ## Usage
 
 ```swift
-@State var text: String = ""
+@State var message: String = ""
 
 var body: some View {
-    ChatField("Message", text: $text) {
+    ChatField("Message", message: $message) {
         // Define the action to perform upon text submission
     } footer: {
         Text("This is footer")
