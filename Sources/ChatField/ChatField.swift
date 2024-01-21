@@ -79,7 +79,7 @@ public struct ChatField<Footer: View>: View {
         } footer: {
             Text("Lorem ipsum dolor sit amet.")
         }
-        .textFieldStyle(CapsuleChatFieldStyle())
+        .chatFieldStyle(.capsule)
     }
     .padding()
 }

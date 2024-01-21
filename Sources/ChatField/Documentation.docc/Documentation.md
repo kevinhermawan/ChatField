@@ -25,6 +25,6 @@ var body: some View {
     } footer: {
         Text("This is footer")
     }
-    .textFieldStyle(CapsuleChatFieldStyle())
+    .chatFieldStyle(.capsule)
 }
 ```
