@@ -6,13 +6,13 @@ A customizable, multiline text field for chat interfaces in SwiftUI.
 
 The `ChatField` struct enhances the standard SwiftUI text field by supporting multiline input and adapting to specific platform behaviors.
 
-### iOS Specifics
+### iOS
 
-On iOS, `ChatField` provides a multiline text field with a line limit.
+On iOS, `ChatField` offers an expanded chat field experience, enabling multiline input with a specified line limit, thus catering to the requirements of chat-based applications.
 
-### macOS Specifics
+### macOS
 
-On macOS, `ChatField` allows the insertion of new lines using `Shift+Enter`.
+On macOS, `ChatField` is designed to enhance user interaction by allowing the insertion of new lines through `Shift+Enter`, aligning with the typical chat interface behavior on desktop platforms.
 
 ## Documentation
 

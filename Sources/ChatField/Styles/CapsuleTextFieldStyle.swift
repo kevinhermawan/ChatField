@@ -1,5 +1,5 @@
 //
-//  CapsuleTextFieldStyle.swift
+//  CapsuleChatFieldStyle.swift
 //
 //
 //  Created by Kevin Hermawan on 11/12/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// A text field style with a capsule-shaped border.
+/// A chat field style with a capsule-shaped border.
 public struct CapsuleChatFieldStyle: TextFieldStyle {
     public init() {}
     
