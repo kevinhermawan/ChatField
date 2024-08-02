@@ -10,72 +10,77 @@ import SwiftUIIntrospect
 
 /// A SwiftUI view that provides a multiline, editable chat interface.
 ///
-/// ``ChatField`` extends standard text input capabilities by offering multiline text support and is optimized for different platforms .
-public struct ChatField<Footer: View>: View {
+/// - Parameters:
+///   - titleKey: A localized string key for the placeholder text.
+///   - text: A binding to the text entered by the user.
+///   - action: A closure to be executed when the user submits the text.
+///   - leadingAccessory: A view builder for content to be displayed before the text field.
+///   - trailingAccessory: A view builder for content to be displayed after the text field.
+///   - footer: A view builder for content to be displayed below the text field.
+public struct ChatField<LeadingAccessory: View, TrailingAccessory: View, FooterView: View>: View {
     private var titleKey: LocalizedStringKey
-    @Binding private var message: String
+    @Binding private var text: String
     
     private var action: () -> Void
-    private var footer: () -> Footer
+    private var leadingAccessory: () -> LeadingAccessory
+    private var trailingAccessory: () -> TrailingAccessory
+    private var footer: () -> FooterView
     
-    /// Initializes a ``ChatField`` with specified parameters.
+    /// Creates a new ChatField instance.
     ///
     /// - Parameters:
-    ///   - titleKey: A `LocalizedStringKey` representing the localized title of the chat field, indicating its functional purpose.
-    ///   - message: A `Binding` to a `String` value representing the editable text in the chat field.
-    ///   - action: A closure that is executed when the user submits the message.
-    ///   - footer: A closure returning a `View` that represents the footer content below the chat field.
+    ///   - titleKey: A localized string key for the placeholder text.
+    ///   - text: A binding to the text entered by the user.
+    ///   - action: A closure to be executed when the user submits the text.
+    ///   - leadingAccessory: A view builder for content to be displayed before the text field.
+    ///   - trailingAccessory: A view builder for content to be displayed after the text field.
+    ///   - footer: A view builder for content to be displayed below the text field.
     public init(
         _ titleKey: LocalizedStringKey,
-        message: Binding<String>,
+        text: Binding<String>,
         action: @escaping () -> Void,
-        footer: @escaping () -> Footer
+        @ViewBuilder leadingAccessory: @escaping () -> LeadingAccessory = { EmptyView() },
+        @ViewBuilder trailingAccessory: @escaping () -> TrailingAccessory = { EmptyView() },
+        @ViewBuilder footer: @escaping () -> FooterView = { EmptyView() }
     ) {
         self.titleKey = titleKey
-        self._message = message
+        self._text = text
         self.action = action
+        self.leadingAccessory = leadingAccessory
+        self.trailingAccessory = trailingAccessory
         self.footer = footer
     }
     
     public var body: some View {
         VStack(spacing: 8) {
-            #if os(iOS)
-            TextField(titleKey, text: $message, axis: .vertical)
-                .lineLimit(5)
-                .onSubmit { action() }
-            #elseif os(macOS)
-            TextField(titleKey, text: $message, axis: .vertical)
-                .introspect(.textField(axis: .vertical), on: .macOS(.v14)) { textField in
-                    textField.lineBreakMode = .byWordWrapping
-                }
-                .onSubmit { macOS_action() }
-            #endif
+            HStack(spacing: 16) {
+                leadingAccessory()
+                BaseTextField(titleKey, text: $text, action: action)
+                trailingAccessory()
+            }
             
             footer()
-                #if os(iOS)
-                .font(.footnote)
-                #elseif os(macOS)
-                .font(.callout)
-                #endif
-                .foregroundStyle(.secondary)
         }
     }
-    
-    #if os(macOS)
-    private func macOS_action() {
-        if NSApp.currentEvent?.modifierFlags.contains(.shift) == true {
-            message.appendNewLine()
-        } else {
-            action()
-        }
-    }
-    #endif
 }
 
 #Preview {
     VStack {
-        ChatField("Message", message: .constant("")) {
-            
+        ChatField("Message", text: .constant("")) {
+            print("Send message")
+        }
+        .chatFieldStyle(.capsule)
+        
+        ChatField("Message", text: .constant("")) {
+            print("Send message")
+        } leadingAccessory: {
+            Button(action: {}) {
+                Image(systemName: "paperclip")
+            }
+        } trailingAccessory: {
+            Button(action: {}) {
+                Image(systemName: "arrow.up.circle.fill")
+            }
         } footer: {
             Text("Lorem ipsum dolor sit amet.")
         }
