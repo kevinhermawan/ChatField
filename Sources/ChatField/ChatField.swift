@@ -53,7 +53,7 @@ public struct ChatField<LeadingAccessory: View, TrailingAccessory: View, FooterV
     
     public var body: some View {
         VStack(spacing: 8) {
-            HStack(spacing: 16) {
+            HStack(alignment: .center, spacing: 12) {
                 leadingAccessory()
                 BaseTextField(titleKey, text: $text, action: action)
                 trailingAccessory()
@@ -66,11 +66,6 @@ public struct ChatField<LeadingAccessory: View, TrailingAccessory: View, FooterV
 
 #Preview {
     VStack {
-        ChatField("Message", text: .constant("")) {
-            print("Send message")
-        }
-        .chatFieldStyle(.capsule)
-        
         ChatField("Message", text: .constant("")) {
             print("Send message")
         } leadingAccessory: {

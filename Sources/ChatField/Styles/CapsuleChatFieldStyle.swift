@@ -10,15 +10,13 @@ import SwiftUI
 struct CapsuleChatFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .padding(.vertical, 6)
-            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .padding(.horizontal)
             .textFieldStyle(.plain)
-            .clipShape(ClipShape())
-            #if os(iOS)
-            .overlay(ClipShape().stroke(Color(.separator)))
-            #elseif os(macOS)
-            .overlay(ClipShape().stroke(Color(.separatorColor)))
-            #endif
+            .overlay(
+                Capsule()
+                    .stroke(.secondary, lineWidth: 0.5)
+            )
     }
     
     @ViewBuilder
