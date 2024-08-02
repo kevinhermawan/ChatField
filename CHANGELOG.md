@@ -1,3 +1,9 @@
+# 3.0.0
+
+## What's Changed
+
+- feat: adds `leadingAccessory` and `trailingAccessory` by @kevinhermawan in https://github.com/kevinhermawan/ChatField/pull/1
+
 # 2.0.0
 
 ### Added
