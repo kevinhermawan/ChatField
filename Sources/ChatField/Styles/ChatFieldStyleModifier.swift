@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+public enum ChatFieldStyle {
+    case capsule
+}
+
 struct ChatFieldStyleModifier: ViewModifier {
     var style: ChatFieldStyle
     
