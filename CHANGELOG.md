@@ -1,3 +1,9 @@
+# 3.0.3
+
+## What's Changed
+
+- fix: `chatFieldDisabled` is inaccessible by @kevinhermawan in https://github.com/kevinhermawan/ChatField/pull/5
+
 # 3.0.2
 
 ## What's Changed
