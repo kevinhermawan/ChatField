@@ -12,7 +12,7 @@ let package = Package(
             targets: ["ChatField"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/siteline/swiftui-introspect.git", .upToNextMajor(from: "1.1.1")),
+        .package(url: "https://github.com/siteline/swiftui-introspect.git", .upToNextMajor(from: "1.3.0")),
         .package(url: "https://github.com/apple/swift-docc-plugin.git", .upToNextMajor(from: "1.3.0"))
     ],
     targets: [
