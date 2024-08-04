@@ -1,3 +1,10 @@
+# 3.0.2
+
+## What's Changed
+
+- feat: adds `chatFieldDisabled` modifier by @kevinhermawan in https://github.com/kevinhermawan/ChatField/pull/3
+- chore: bump dependencies by @kevinhermawan in https://github.com/kevinhermawan/ChatField/pull/4
+
 # 3.0.1
 
 ## What's Changed
