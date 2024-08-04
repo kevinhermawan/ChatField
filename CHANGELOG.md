@@ -1,3 +1,9 @@
+# 3.0.1
+
+## What's Changed
+
+- refactor: improves text field style by @kevinhermawan in https://github.com/kevinhermawan/ChatField/pull/2
+
 # 3.0.0
 
 ## What's Changed
