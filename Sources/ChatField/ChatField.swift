@@ -68,7 +68,7 @@ public struct ChatField<LeadingAccessory: View, TrailingAccessory: View, FooterV
         }
     }
     
-    func chatFieldDisabled(_ disabled: Bool) -> ChatField {
+    public func chatFieldDisabled(_ disabled: Bool) -> ChatField {
         var view = self
         view.isTextFieldDisabled = disabled
         
