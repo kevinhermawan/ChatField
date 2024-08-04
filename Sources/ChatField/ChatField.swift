@@ -26,6 +26,8 @@ public struct ChatField<LeadingAccessory: View, TrailingAccessory: View, FooterV
     private var trailingAccessory: () -> TrailingAccessory
     private var footer: () -> FooterView
     
+    private var isTextFieldDisabled: Bool = false
+    
     /// Creates a new ChatField instance.
     ///
     /// - Parameters:
@@ -55,12 +57,22 @@ public struct ChatField<LeadingAccessory: View, TrailingAccessory: View, FooterV
         VStack(spacing: 8) {
             HStack(alignment: .center, spacing: 12) {
                 leadingAccessory()
+                
                 BaseTextField(titleKey, text: $text, action: action)
+                    .disabled(isTextFieldDisabled)
+                
                 trailingAccessory()
             }
             
             footer()
         }
+    }
+    
+    func chatFieldDisabled(_ disabled: Bool) -> ChatField {
+        var view = self
+        view.isTextFieldDisabled = disabled
+        
+        return view
     }
 }
 
