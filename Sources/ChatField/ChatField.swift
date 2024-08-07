@@ -93,5 +93,6 @@ public struct ChatField<LeadingAccessory: View, TrailingAccessory: View, FooterV
         }
         .chatFieldStyle(.capsule)
     }
+    .frame(maxHeight: 200)
     .padding()
 }

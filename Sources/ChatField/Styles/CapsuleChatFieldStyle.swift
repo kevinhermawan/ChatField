@@ -8,19 +8,31 @@
 import SwiftUI
 
 struct CapsuleChatFieldStyle: TextFieldStyle {
+    @State private var textHeight: CGFloat = 0
+    
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .padding(.vertical, 8)
             .padding(.horizontal)
             .textFieldStyle(.plain)
-            .overlay(
-                Capsule()
-                    .stroke(.secondary, lineWidth: 0.5)
+            .background(
+                GeometryReader { geometry in
+                    Color.clear.preference(key: ViewHeightKey.self, value: geometry.size.height)
+                }
             )
-    }
-    
-    @ViewBuilder
-    private func ClipShape() -> some Shape {
-        RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .onPreferenceChange(ViewHeightKey.self) { height in
+                self.textHeight = height
+            }
+            .overlay(
+                Group {
+                    if textHeight <= 40 {
+                        Capsule()
+                            .stroke(.secondary, lineWidth: 0.5)
+                    } else {
+                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            .stroke(.secondary, lineWidth: 0.5)
+                    }
+                }
+            )
     }
 }
