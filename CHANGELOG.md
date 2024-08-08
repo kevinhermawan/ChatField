@@ -1,3 +1,10 @@
+# 3.0.4
+
+## What's Changed
+
+- fix: border is broken in multi-line by @kevinhermawan in https://github.com/kevinhermawan/ChatField/pull/6
+- refactor: change horizontal alignment to bottom by @kevinhermawan in https://github.com/kevinhermawan/ChatField/pull/7
+
 # 3.0.3
 
 ## What's Changed
